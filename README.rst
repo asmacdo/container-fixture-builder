@@ -1,8 +1,8 @@
 Container Fixture Builder
 =========================
 
-build.sh
---------
+build_and_push.sh
+-----------------
 
 This is a tool to build minimal containers that are related to each other in predictable ways. It
 creates:
@@ -17,10 +17,10 @@ To generate the fixture, run:
 .. code-block:: bash
 
    # Format
-   bash build.sh <upstream_org> <upstream_repo>
+   bash build_and_push.sh <upstream_org> <upstream_repo>
 
    # Example
-   bash build.sh asmacdo test-fixture-1
+   bash build_and_push.sh asmacdo test-fixture-1
 
 
 The example will:
@@ -32,14 +32,16 @@ The example will:
 matchmaker.py
 -------------
 
+Matchmaker is a tool to map the relationships between content in a pulp docker repository.
 Matchmaker has 2 modes, `list` and `relation`.
 
 List
 ****
 
+Print the relationships heirarchy (top down) between content in the specified pulp repo.
+
 .. code-block:: bash
 
-   # Print the relationships heirarchy between content in the specified pulp repo.
    $ python matchmaker.py test-fixture-1 --list
 
 Partial Output::
@@ -71,9 +73,11 @@ Partial Output::
 
 Relation
 ********
+
+Determine sharing relationships for a given manifest or manifest-list digest.
+
 .. code-block:: bash
 
-   # Get information about shared content for a specific manifest or manifest list
    $ python matchmaker.py test-fixture-1 --relation sha256:b16ece3182c8386ab1fd001f4c69edaf984c728ad3561ba24d9e93193eb8e8c0
 
 Partial Output::
